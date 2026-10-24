@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="54dp"
+        android:paddingTop="42dp"
+        android:paddingRight="54dp"
+        android:paddingBottom="42dp">
+
+        <!-- Hang tren: dong ho + thoi tiet -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextClock
+                    android:id="@+id/clock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:format12Hour="HH:mm"
+                    android:format24Hour="HH:mm"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="-0.02"
+                    android:textSize="64sp" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/weatherBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="21dp"
+                android:paddingTop="13dp"
+                android:paddingRight="21dp"
+                android:paddingBottom="13dp">
+
+                <ImageView
+                    android:id="@+id/weatherIcon"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:importantForAccessibility="no" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/weatherDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 3 o ung dung lon -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="195dp"
+            android:layout_marginTop="30dp"
+            android:clipChildren="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/tileYoutube"
+                style="@style/Tile"
+                android:layout_marginRight="12dp"
+                android:nextFocusDown="@+id/btnHdmi">
+
+                <ImageView
+                    style="@style/TileIcon"
+                    android:background="@drawable/sq_red"
+                    android:src="@drawable/ic_play" />
+
+                <TextView
+                    android:id="@+id/labelYoutube"
+                    style="@style/TileLabel"
+                    android:text="YouTube" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tileVtv"
+                style="@style/Tile"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:nextFocusDown="@+id/btnSettings">
+
+                <ImageView
+                    style="@style/TileIcon"
+                    android:background="@drawable/sq_blue"
+                    android:src="@drawable/ic_tv" />
+
+                <TextView
+                    android:id="@+id/labelVtv"
+                    style="@style/TileLabel"
+                    android:text="VTV Go" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tileFpt"
+                style="@style/Tile"
+                android:layout_marginLeft="12dp"
+                android:nextFocusDown="@+id/btnAllApps">
+
+                <ImageView
+                    style="@style/TileIcon"
+                    android:background="@drawable/sq_orange"
+                    android:src="@drawable/ic_fpt" />
+
+                <TextView
+                    android:id="@+id/labelFpt"
+                    style="@style/TileLabel"
+                    android:text="FPT Play" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Hang nut nho -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:clipChildren="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnHdmi"
+                style="@style/Pill"
+                android:drawableLeft="@drawable/ic_hdmi"
+                android:nextFocusUp="@+id/tileYoutube"
+                android:text="@string/hdmi" />
+
+            <TextView
+                android:id="@+id/btnSettings"
+                style="@style/Pill"
+                android:layout_marginLeft="18dp"
+                android:drawableLeft="@drawable/ic_settings"
+                android:nextFocusUp="@+id/tileVtv"
+                android:text="@string/settings" />
+
+            <TextView
+                android:id="@+id/btnAllApps"
+                style="@style/Pill"
+                android:layout_marginLeft="18dp"
+                android:drawableLeft="@drawable/ic_grid"
+                android:nextFocusUp="@+id/tileFpt"
+                android:text="@string/all_apps" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

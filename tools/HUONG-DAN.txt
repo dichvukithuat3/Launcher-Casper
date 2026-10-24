@@ -1,0 +1,22 @@
+KÍNH LAUNCHER – HƯỚNG DẪN CÀI ĐẶT
+================================
+
+A. TRÊN TV (làm 1 lần)
+1. Cài đặt > Tùy chọn thiết bị > Giới thiệu > bấm 7 lần vào
+   "Bản dựng hệ điều hành Android TV" cho đến khi báo đã là nhà phát triển.
+2. Quay lại Tùy chọn thiết bị > Tùy chọn nhà phát triển:
+   bật "Gỡ lỗi USB" và "Gỡ lỗi không dây" (hoặc "Gỡ lỗi qua mạng").
+3. TV và máy tính phải cùng mạng Wi-Fi.
+
+B. TRÊN MÁY TÍNH WINDOWS
+1. Giải nén file zip ra một thư mục (ví dụ Desktop\KinhLauncher).
+2. Nháy đúp cai-dat.bat và làm theo hướng dẫn trong cửa sổ.
+   - Lần đầu, nếu không kết nối thẳng được, cửa sổ sẽ hỏi IP:PORT và mã ghép nối.
+     Trên TV mở Gỡ lỗi không dây > Ghép nối thiết bị bằng mã để lấy thông tin.
+   - Nếu TV hỏi "Cho phép gỡ lỗi?", chọn Luôn cho phép.
+3. Khi giao diện mới hiện lên TV và dùng remote ổn, gõ Y để tắt giao diện cũ.
+
+C. CÁC FILE KHÁC
+- khoi-phuc.bat : bật lại giao diện gốc (và gỡ Kính Launcher nếu muốn).
+- liet-ke-app.bat : xuất danh sách app, RAM, bộ nhớ ra danh-sach-app.txt
+  để gửi lại cho Claude chọn app rác cần tắt.
