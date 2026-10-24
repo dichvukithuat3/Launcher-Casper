@@ -14,11 +14,20 @@ android {
         versionName '1.0'
     }
 
+    signingConfigs {
+        kinh {
+            // Khoa ky co dinh: moi ban build sau deu cai de len ban truoc duoc
+            storeFile file('kinh-release.jks')
+            storePassword 'kinhlauncher'
+            keyAlias 'kinh'
+            keyPassword 'kinhlauncher'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
-            // Ky bang khoa debug de cai truc tiep len TV (sideload)
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.kinh
         }
     }
 

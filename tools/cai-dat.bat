@@ -9,7 +9,14 @@ if errorlevel 1 goto fail
 echo.
 echo [3/5] Dang cai Kinh Launcher len TV...
 "%ADB%" -s %SER% install -r "%~dp0KinhLauncher.apk"
+if not errorlevel 1 goto installed
+echo.
+echo Ban cu tren TV khong cai de duoc. Dang go ban cu va cai lai...
+for %%P in (com.google.android.tvlauncher com.google.android.apps.tv.launcherx com.google.android.leanbacklauncher) do "%ADB%" -s %SER% shell pm enable %%P >nul 2>&1
+"%ADB%" -s %SER% uninstall vn.liteglass.launcher
+"%ADB%" -s %SER% install "%~dp0KinhLauncher.apk"
 if errorlevel 1 goto fail
+:installed
 
 echo [4/5] Dat lam man hinh chinh va mo thu...
 "%ADB%" -s %SER% shell cmd package set-home-activity vn.liteglass.launcher/.MainActivity
