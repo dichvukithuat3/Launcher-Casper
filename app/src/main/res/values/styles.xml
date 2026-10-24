@@ -5,20 +5,33 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="Tile">
+    <style name="TileWrap">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:clipChildren">false</item>
+    </style>
+
+    <style name="TileGlow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">-30dp</item>
+        <item name="android:alpha">0</item>
+    </style>
+
+    <style name="Tile">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:padding">24dp</item>
+        <item name="android:padding">22dp</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
     </style>
 
     <style name="TileIcon">
-        <item name="android:layout_width">72dp</item>
-        <item name="android:layout_height">72dp</item>
-        <item name="android:padding">16dp</item>
+        <item name="android:layout_width">78dp</item>
+        <item name="android:layout_height">78dp</item>
+        <item name="android:padding">18dp</item>
         <item name="android:scaleType">fitCenter</item>
         <item name="android:importantForAccessibility">no</item>
     </style>
@@ -28,21 +41,30 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">bottom</item>
-        <item name="android:textSize">26sp</item>
+        <item name="android:textSize">27sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TileHint">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:text">@string/hint_open</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:alpha">0</item>
     </style>
 
     <style name="Pill">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">22dp</item>
-        <item name="android:paddingRight">24dp</item>
-        <item name="android:paddingTop">13dp</item>
-        <item name="android:paddingBottom">13dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">22dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
         <item name="android:drawablePadding">10dp</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">17sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
     </style>

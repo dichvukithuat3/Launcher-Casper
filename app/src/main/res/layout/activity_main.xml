@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false">
 
     <ImageView
         android:id="@+id/bg"
@@ -13,13 +14,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="vertical"
         android:paddingLeft="54dp"
-        android:paddingTop="42dp"
+        android:paddingTop="34dp"
         android:paddingRight="54dp"
-        android:paddingBottom="42dp">
+        android:paddingBottom="36dp">
 
-        <!-- Hang tren: dong ho + thoi tiet -->
+        <!-- Hang tren: loi chao + dong ho + thoi tiet -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,21 +34,29 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/greeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.03"
+                    android:textSize="17sp" />
+
                 <TextClock
                     android:id="@+id/clock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
                     android:format12Hour="HH:mm"
                     android:format24Hour="HH:mm"
                     android:includeFontPadding="false"
-                    android:letterSpacing="-0.02"
-                    android:textSize="64sp" />
+                    android:letterSpacing="-0.03"
+                    android:textSize="84sp" />
 
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-medium"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -55,29 +66,44 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="21dp"
-                android:paddingTop="13dp"
-                android:paddingRight="21dp"
-                android:paddingBottom="13dp">
+                android:paddingLeft="18dp"
+                android:paddingTop="15dp"
+                android:paddingRight="23dp"
+                android:paddingBottom="15dp">
 
-                <ImageView
-                    android:id="@+id/weatherIcon"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
-                    android:importantForAccessibility="no" />
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:clipChildren="false">
+
+                    <View
+                        android:id="@+id/weatherGlow"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="-10dp" />
+
+                    <ImageView
+                        android:id="@+id/weatherIcon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:importantForAccessibility="no" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginLeft="13dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/temp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="sans-serif-medium"
+                        android:includeFontPadding="false"
+                        android:textSize="27sp" />
 
                     <TextView
                         android:id="@+id/weatherDesc"
@@ -88,73 +114,57 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 3 o ung dung lon -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- 3 o ung dung lon, moi o co vang sang mau rieng khi duoc chon -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="195dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="202dp"
             android:clipChildren="false"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/tileYoutube"
-                style="@style/Tile"
-                android:layout_marginRight="12dp"
-                android:nextFocusDown="@+id/btnHdmi">
+            <FrameLayout style="@style/TileWrap" android:layout_marginRight="13dp">
+                <View android:id="@+id/glowYoutube" style="@style/TileGlow" />
+                <LinearLayout android:id="@+id/tileYoutube" style="@style/Tile" android:nextFocusDown="@+id/btnHdmi">
+                    <ImageView style="@style/TileIcon" android:background="@drawable/sq_red" android:src="@drawable/ic_play" />
+                    <TextView android:id="@+id/labelYoutube" style="@style/TileLabel" android:text="YouTube" />
+                    <TextView android:id="@+id/hintYoutube" style="@style/TileHint" />
+                </LinearLayout>
+            </FrameLayout>
 
-                <ImageView
-                    style="@style/TileIcon"
-                    android:background="@drawable/sq_red"
-                    android:src="@drawable/ic_play" />
+            <FrameLayout style="@style/TileWrap" android:layout_marginLeft="13dp" android:layout_marginRight="13dp">
+                <View android:id="@+id/glowVtv" style="@style/TileGlow" />
+                <LinearLayout android:id="@+id/tileVtv" style="@style/Tile" android:nextFocusDown="@+id/btnSettings">
+                    <ImageView style="@style/TileIcon" android:background="@drawable/sq_blue" android:src="@drawable/ic_tv" />
+                    <TextView android:id="@+id/labelVtv" style="@style/TileLabel" android:text="VTV Go" />
+                    <TextView android:id="@+id/hintVtv" style="@style/TileHint" />
+                </LinearLayout>
+            </FrameLayout>
 
-                <TextView
-                    android:id="@+id/labelYoutube"
-                    style="@style/TileLabel"
-                    android:text="YouTube" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tileVtv"
-                style="@style/Tile"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:nextFocusDown="@+id/btnSettings">
-
-                <ImageView
-                    style="@style/TileIcon"
-                    android:background="@drawable/sq_blue"
-                    android:src="@drawable/ic_tv" />
-
-                <TextView
-                    android:id="@+id/labelVtv"
-                    style="@style/TileLabel"
-                    android:text="VTV Go" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tileFpt"
-                style="@style/Tile"
-                android:layout_marginLeft="12dp"
-                android:nextFocusDown="@+id/btnAllApps">
-
-                <ImageView
-                    style="@style/TileIcon"
-                    android:background="@drawable/sq_orange"
-                    android:src="@drawable/ic_fpt" />
-
-                <TextView
-                    android:id="@+id/labelFpt"
-                    style="@style/TileLabel"
-                    android:text="FPT Play" />
-            </LinearLayout>
+            <FrameLayout style="@style/TileWrap" android:layout_marginLeft="13dp">
+                <View android:id="@+id/glowFpt" style="@style/TileGlow" />
+                <LinearLayout android:id="@+id/tileFpt" style="@style/Tile" android:nextFocusDown="@+id/btnAllApps">
+                    <ImageView style="@style/TileIcon" android:background="@drawable/sq_orange" android:src="@drawable/ic_fpt" />
+                    <TextView android:id="@+id/labelFpt" style="@style/TileLabel" android:text="FPT Play" />
+                    <TextView android:id="@+id/hintFpt" style="@style/TileHint" />
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
 
-        <!-- Hang nut nho -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Hang nut nho, can giua -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:clipChildren="false"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <TextView
@@ -167,7 +177,7 @@
             <TextView
                 android:id="@+id/btnSettings"
                 style="@style/Pill"
-                android:layout_marginLeft="18dp"
+                android:layout_marginLeft="15dp"
                 android:drawableLeft="@drawable/ic_settings"
                 android:nextFocusUp="@+id/tileVtv"
                 android:text="@string/settings" />
@@ -175,7 +185,7 @@
             <TextView
                 android:id="@+id/btnAllApps"
                 style="@style/Pill"
-                android:layout_marginLeft="18dp"
+                android:layout_marginLeft="15dp"
                 android:drawableLeft="@drawable/ic_grid"
                 android:nextFocusUp="@+id/tileFpt"
                 android:text="@string/all_apps" />

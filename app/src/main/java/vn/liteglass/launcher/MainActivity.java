@@ -40,7 +40,11 @@ public class MainActivity extends Activity {
     private final Handler handler = new Handler(Looper.getMainLooper());
 
     private ImageView bg, weatherIcon;
-    private TextView clock, date, temp, weatherDesc;
+    private TextView greeting, clock, date, temp, weatherDesc;
+    private View weatherGlow;
+    private View[] glows;
+    private TextView[] hints;
+    private static final int[] GLOW_COLORS = {0x99FF3C46, 0x803C82FF, 0x80FF8C28};
     private LinearLayout weatherBox;
     private View[] tiles;
     private TextView[] tileLabels;
@@ -67,7 +71,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         bg = findViewById(R.id.bg);
+        greeting = findViewById(R.id.greeting);
         clock = findViewById(R.id.clock);
+        weatherGlow = findViewById(R.id.weatherGlow);
         date = findViewById(R.id.date);
         temp = findViewById(R.id.temp);
         weatherDesc = findViewById(R.id.weatherDesc);
@@ -78,7 +84,18 @@ public class MainActivity extends Activity {
         tileLabels = new TextView[]{findViewById(R.id.labelYoutube), findViewById(R.id.labelVtv), findViewById(R.id.labelFpt)};
         pills = new TextView[]{findViewById(R.id.btnHdmi), findViewById(R.id.btnSettings), findViewById(R.id.btnAllApps)};
 
-        for (View t : tiles) t.setOnFocusChangeListener(Glass.ZOOM);
+        glows = new View[]{findViewById(R.id.glowYoutube), findViewById(R.id.glowVtv), findViewById(R.id.glowFpt)};
+        hints = new TextView[]{findViewById(R.id.hintYoutube), findViewById(R.id.hintVtv), findViewById(R.id.hintFpt)};
+        for (int i = 0; i < tiles.length; i++) {
+            final View glow = glows[i];
+            final View hint = hints[i];
+            glow.setBackground(Glass.glow(this, GLOW_COLORS[i], 190));
+            tiles[i].setOnFocusChangeListener((v, has) -> {
+                Glass.ZOOM.onFocusChange(v, has);
+                glow.animate().alpha(has ? 1f : 0f).scaleX(has ? 1.06f : 1f).scaleY(has ? 1.06f : 1f).setDuration(160).start();
+                hint.animate().alpha(has ? 1f : 0f).setDuration(160).start();
+            });
+        }
         for (View p : pills) p.setOnFocusChangeListener(Glass.ZOOM);
 
         tiles[0].setOnClickListener(v -> openApp("YouTube",
@@ -135,13 +152,18 @@ public class MainActivity extends Activity {
         int muted = Glass.muted(day);
 
         clock.setTextColor(text);
+        greeting.setTextColor(muted);
+        greeting.setText(greetingText());
+        if (day) clock.setShadowLayer(Glass.dp(this, 12), 0, Glass.dp(this, 2), 0xCCFFFFFF);
+        else clock.setShadowLayer(Glass.dp(this, 16), 0, 0, 0x73A0B4FF);
         date.setTextColor(muted);
         temp.setTextColor(text);
         weatherDesc.setTextColor(muted);
-        weatherBox.setBackground(Glass.staticPanel(this, day, 20));
+        weatherBox.setBackground(Glass.staticPanel(this, day, 24));
 
-        for (View t : tiles) t.setBackground(Glass.panel(this, day, 27));
+        for (View t : tiles) t.setBackground(Glass.panel(this, day, 30));
         for (TextView l : tileLabels) l.setTextColor(text);
+        for (TextView h : hints) h.setTextColor(muted);
         for (TextView p : pills) {
             p.setBackground(Glass.panel(this, day, 999));
             p.setTextColor(text);
@@ -157,7 +179,16 @@ public class MainActivity extends Activity {
         updateWeatherViews();
     }
 
+    private static String greetingText() {
+        int h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        if (h >= 4 && h < 11) return "Chào buổi sáng";
+        if (h >= 11 && h < 13) return "Chào buổi trưa";
+        if (h >= 13 && h < 18) return "Chào buổi chiều";
+        return "Chào buổi tối";
+    }
+
     private void updateDate() {
+        if (greeting != null) greeting.setText(greetingText());
         Calendar c = Calendar.getInstance();
         date.setText(DAYS[c.get(Calendar.DAY_OF_WEEK) - 1] + ", "
                 + c.get(Calendar.DAY_OF_MONTH) + " tháng " + (c.get(Calendar.MONTH) + 1));
@@ -205,7 +236,7 @@ public class MainActivity extends Activity {
         int color;
         if (weatherCode >= 0 && weatherCode <= 1) {
             icon = day ? R.drawable.ic_sun : R.drawable.ic_moon;
-            color = day ? 0xFFC26A12 : 0xFFF4D27A;
+            color = day ? 0xFFFFB020 : 0xFFFFE29A;
         } else if (weatherCode >= 51) {
             icon = R.drawable.ic_rain;
             color = Glass.text(day);
@@ -216,6 +247,7 @@ public class MainActivity extends Activity {
             icon = day ? R.drawable.ic_sun : R.drawable.ic_moon;
             color = Glass.muted(day);
         }
+        weatherGlow.setBackground(Glass.glow(this, (color & 0x00FFFFFF) | 0x8C000000, 32));
         weatherIcon.setImageResource(icon);
         weatherIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN);
     }

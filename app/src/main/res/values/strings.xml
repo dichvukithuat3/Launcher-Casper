@@ -3,4 +3,5 @@
     <string name="all_apps">Tất cả ứng dụng</string>
     <string name="hdmi">Nguồn HDMI</string>
     <string name="settings">Cài đặt</string>
+    <string name="hint_open">Nhấn OK để mở</string>
 </resources>
