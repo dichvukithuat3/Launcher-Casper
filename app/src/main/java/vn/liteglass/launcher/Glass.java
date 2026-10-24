@@ -85,7 +85,7 @@ final class Glass {
     /** Phong to nhe khi duoc chon. Chi dung scale (re tren GPU). */
     static final View.OnFocusChangeListener ZOOM = (v, has) ->
             v.animate().scaleX(has ? 1.06f : 1f).scaleY(has ? 1.06f : 1f)
-                    .setDuration(120).start();
+                    .setDuration(110).withLayer().start();
 
     static boolean launchPackage(Context c, String pkg) {
         PackageManager pm = c.getPackageManager();

@@ -18,5 +18,6 @@ B. TRÊN MÁY TÍNH WINDOWS
 
 C. CÁC FILE KHÁC
 - khoi-phuc.bat : bật lại giao diện gốc (và gỡ Kính Launcher nếu muốn).
+- don-dep.bat : tắt app rác chạy ngầm (bật lại bằng hoan-tac-don-dep.bat).
 - liet-ke-app.bat : xuất danh sách app, RAM, bộ nhớ ra danh-sach-app.txt
   để gửi lại cho Claude chọn app rác cần tắt.

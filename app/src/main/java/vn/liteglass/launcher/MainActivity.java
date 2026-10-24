@@ -92,8 +92,8 @@ public class MainActivity extends Activity {
             glow.setBackground(Glass.glow(this, GLOW_COLORS[i], 190));
             tiles[i].setOnFocusChangeListener((v, has) -> {
                 Glass.ZOOM.onFocusChange(v, has);
-                glow.animate().alpha(has ? 1f : 0f).scaleX(has ? 1.06f : 1f).scaleY(has ? 1.06f : 1f).setDuration(160).start();
-                hint.animate().alpha(has ? 1f : 0f).setDuration(160).start();
+                glow.animate().alpha(has ? 1f : 0f).setDuration(140).withLayer().start();
+                hint.setAlpha(has ? 1f : 0f);
             });
         }
         for (View p : pills) p.setOnFocusChangeListener(Glass.ZOOM);
@@ -102,7 +102,7 @@ public class MainActivity extends Activity {
                 new String[]{"com.google.android.youtube.tv", "com.google.android.youtube"},
                 new String[]{"youtube"}));
         tiles[1].setOnClickListener(v -> openApp("VTV Go",
-                new String[]{"com.vtvgo.androidtv", "com.vtvgo.android", "vn.vtv.vtvgo"},
+                new String[]{"vn.vtv.vtvgotv", "com.vtvgo.androidtv", "vn.vtv.vtvgo"},
                 new String[]{"vtv go", "vtvgo"}));
         tiles[2].setOnClickListener(v -> openApp("FPT Play",
                 new String[]{"net.fptplay.ottbox", "com.fptplay.ottbox", "com.fplay.activity"},
@@ -302,6 +302,10 @@ public class MainActivity extends Activity {
                 "com.android.tv.action.VIEW_INPUTS",
                 "android.settings.TV_INPUT_SETTINGS",
         };
+        // TV Casper (nen Realtek/MK): app nguon tin hieu cua hang
+        for (String p : new String[]{"com.apps.livetv", "com.apps.passthrough", "com.apps.atv"}) {
+            if (Glass.launchPackage(this, p)) return;
+        }
         PackageManager pm = getPackageManager();
         for (String a : actions) {
             Intent i = new Intent(a);
